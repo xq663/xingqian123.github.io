@@ -558,7 +558,7 @@
         option.value = name;
         nameList.appendChild(option);
       });
-      nameInput.value = "张瑞";
+      nameInput.value = "";
     }
 
     function renderGroupTabs(currentGroup) {
@@ -653,8 +653,15 @@
       }
 
       const person = dateData.people[selectedName];
+      if (!selectedName) {
+        renderEmpty("请输入姓名。");
+        renderLeaderboard(dateData, selectedName);
+        footnote.innerHTML = `当前日期使用底表：<br>${dateData.files.full}<br>${dateData.files.squeeze}`;
+        return;
+      }
+
       if (!person) {
-        renderEmpty(`日期 ${date} 下没有找到该姓名，或该人员不在当前四类排名口径内。`);
+        renderEmpty(`日期 ${date} 下没有找到该姓名，或该人员已被陕西口径过滤。`);
         renderLeaderboard(dateData, selectedName);
         footnote.innerHTML = `当前日期使用底表：<br>${dateData.files.full}<br>${dateData.files.squeeze}`;
         return;
