@@ -366,15 +366,15 @@
       line-height: 1;
       font-style: normal;
     }
-    .trend-badge.up {
+    .trend-up {
       background: rgba(59, 130, 246, 0.14);
       color: #2563eb;
     }
-    .trend-badge.down {
+    .trend-down {
       background: rgba(239, 68, 68, 0.14);
       color: #dc2626;
     }
-    .trend-badge.flat {
+    .trend-flat {
       background: rgba(30, 42, 47, 0.08);
       color: var(--muted);
     }
@@ -650,20 +650,20 @@
     function getRankTrendInfo(date, groupId, name, currentRank) {
       const prevDate = previousDate(date);
       if (!prevDate || !currentRank) {
-        return { text: "", cls: "flat" };
+        return { text: "", cls: "trend-flat" };
       }
       const prevRank = findRank(prevDate, groupId, name);
       if (!prevRank) {
-        return { text: "新上榜", cls: "flat" };
+        return { text: "新上榜", cls: "trend-flat" };
       }
       const diff = prevRank - currentRank;
       if (diff > 0) {
-        return { text: `↑ ${diff}`, cls: "up" };
+        return { text: `↑ ${diff}`, cls: "trend-up" };
       }
       if (diff < 0) {
-        return { text: `↓ ${Math.abs(diff)}`, cls: "down" };
+        return { text: `↓ ${Math.abs(diff)}`, cls: "trend-down" };
       }
-      return { text: "→ 0", cls: "flat" };
+      return { text: "→ 0", cls: "trend-flat" };
     }
 
     function renderRankTrend(date, groupId, name, currentRank) {
